@@ -1,0 +1,7 @@
+{
+  "name": " Lumina AI Search",
+  "description": "A next-generation AI search engine featuring real-time web grounding, automatic diagram generation, and voice search capabilities.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
