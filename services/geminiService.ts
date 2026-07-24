@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import { SearchResult, SearchSource } from '../types';
 
 export const performSearch = async (query: string): Promise<SearchResult> => {
-  const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY;
+  const apiKey = (import.meta as ImportMeta & { env?: { VITE_GEMINI_API_KEY?: string } }).env?.VITE_GEMINI_API_KEY;
 
   if (!apiKey) {
     throw new Error("API Key is missing.");
