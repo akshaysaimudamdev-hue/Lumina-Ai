@@ -8,3 +8,4 @@ python-dotenv
 google-genai
 torch
 numpy
+langchain-text-splitters
