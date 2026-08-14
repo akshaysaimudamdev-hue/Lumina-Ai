@@ -3,9 +3,6 @@ uvicorn[standard]
 python-multipart
 pymupdf
 chromadb
-sentence-transformers
 python-dotenv
 google-genai
-torch
-numpy
 langchain-text-splitters
