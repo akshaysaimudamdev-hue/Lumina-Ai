@@ -1,5 +1,5 @@
 import chromadb
-from sentence_transformers import SentenceTransformer
+from services.embeddings import create_embeddings
 
 # Persistent Chroma Database
 client = chromadb.PersistentClient(path="vector_db")
@@ -7,9 +7,6 @@ client = chromadb.PersistentClient(path="vector_db")
 collection = client.get_or_create_collection(
     name="pdf_documents"
 )
-
-# Embedding model
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 
 def store_embeddings(
@@ -43,14 +40,6 @@ def store_embeddings(
         embeddings=embeddings,
         metadatas=metadatas,
     )
-    metadatas = [
-    {
-        "document_id": document_id,
-        "filename": filename,
-        "chunk": i,
-    }
-    for i in range(len(chunks))
-]
 
 
 def search_text(
@@ -65,7 +54,8 @@ def search_text(
     print("\nSearching ChromaDB...")
     print("Document ID:", document_id)
 
-    query_embedding = embedding_model.encode(query).tolist()
+    # Generate query embedding using Gemini
+    query_embedding = create_embeddings([query])[0]
 
     results = collection.query(
         query_embeddings=[query_embedding],
